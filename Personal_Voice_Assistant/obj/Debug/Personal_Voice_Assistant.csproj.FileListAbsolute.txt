@@ -1,0 +1,10 @@
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\obj\Debug\Personal_Voice_Assistant.csprojResolveAssemblyReference.cache
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\obj\Debug\Personal_Voice_Assistant.Form1.resources
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\obj\Debug\Personal_Voice_Assistant.Properties.Resources.resources
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\obj\Debug\Personal_Voice_Assistant.csproj.GenerateResource.Cache
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\obj\Debug\Personal_Voice_Assistant.csproj.CoreCompileInputs.cache
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\Personal_Voice_Assistant.exe.config
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\Personal_Voice_Assistant.exe
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\Personal_Voice_Assistant.pdb
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\obj\Debug\Personal_Voice_Assistant.exe
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\obj\Debug\Personal_Voice_Assistant.pdb
