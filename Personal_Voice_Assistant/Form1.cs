@@ -26,8 +26,8 @@ namespace Personal_Voice_Assistant
 
             // Create a simple grammar that recognizes "red", "green", or "blue".
             Choices colors = new Choices();
-            colors.Add(new string[] { "red", "green", "blue" });
-
+            colors.Add(new string[] { "red", "green", "blue", "What is the time", "Tell me the time", "What time is it" });
+ 
             // Create a GrammarBuilder object and append the Choices object.
             GrammarBuilder gb = new GrammarBuilder();
             gb.Append(colors);
@@ -47,7 +47,10 @@ namespace Personal_Voice_Assistant
         // Create a simple handler for the SpeechRecognized event.
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            switch(e.Result.Text)
+            DateTime currentTime; //Var to hold time
+
+
+            switch (e.Result.Text)
             {
                 case "red":
                     richTextBox1.Text += "\nred was recognized";
@@ -59,6 +62,19 @@ namespace Personal_Voice_Assistant
 
                 case "blue":
                     richTextBox1.Text += "\nblue was recognized";
+                    break;
+
+                case "What is the time":
+                case "What time is it":
+                case "Tell me the time":
+                    currentTime = DateTime.Now; //Get current time
+
+                    /*Convert time to a string, and format to only display hours and minutes*/
+                    string timeString = currentTime.ToString("HH:mm");
+
+                    /*Display current time*/
+                    richTextBox1.Text += "\nDisplaying time: ";
+                    richTextBox1.Text += timeString;
                     break;
             }
         }
