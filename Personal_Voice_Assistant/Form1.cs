@@ -47,7 +47,20 @@ namespace Personal_Voice_Assistant
         // Create a simple handler for the SpeechRecognized event.
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            MessageBox.Show("Speech recognized: " + e.Result.Text);
+            switch(e.Result.Text)
+            {
+                case "red":
+                    richTextBox1.Text += "\nred was recognized";
+                    break;
+
+                case "green":
+                    richTextBox1.Text += "\ngreen was recognized";
+                    break;
+
+                case "blue":
+                    richTextBox1.Text += "\nblue was recognized";
+                    break;
+            }
         }
     }
 }
