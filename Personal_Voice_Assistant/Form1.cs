@@ -34,7 +34,8 @@ namespace Personal_Voice_Assistant
             commands.Add(new string[] {
                 "red", "green", "blue", //Colors
                 "What is the time", "Tell me the time", "What time is it", "Time", //Time
-                "What day is it", "What day is it today", "Which day is it today", "Can you tell me what day it is" //Day
+                "What day is it", "What day is it today", "Which day is it today", "Can you tell me what day it is", "day", //Day
+                "play glitter"
 
             });
  
@@ -67,19 +68,16 @@ namespace Personal_Voice_Assistant
                 case "red":
                     richTextBox1.Text += "\nred was recognized";
                     break;
-
-                case "green":
-                    richTextBox1.Text += "\ngreen was recognized";
-                    break;
-
+                    
                 case "blue":
                     richTextBox1.Text += "\nblue was recognized";
                     break;
 
-                case "What day is it":
-                case "What day is it today":
-                case "Which day is it today":
-                case "Can you tell me what day it is":
+                case "what day is it":
+                case "what day is it today":
+                case "which day is it today":
+                case "can you tell me what day it is":
+                case "day":
                     currentTime = DateTime.Now;
                     string dayString = currentTime.ToString("dddd");
 
@@ -104,6 +102,13 @@ namespace Personal_Voice_Assistant
 
                     synth.Speak("Current time is" + timeString);
                     
+                    break;
+
+                case "play glitter":
+                    System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+
+                    player.SoundLocation = "glitter.wav";
+                    player.Play();
                     break;
             }
         }
