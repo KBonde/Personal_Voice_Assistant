@@ -26,7 +26,7 @@ namespace Personal_Voice_Assistant
 
             // Create a simple grammar that recognizes "red", "green", or "blue".
             Choices colors = new Choices();
-            colors.Add(new string[] { "red", "green", "blue", "What is the time", "Tell me the time", "What time is it" });
+            colors.Add(new string[] { "red", "green", "blue", "What is the time", "Tell me the time", "What time is it", "Time" });
  
             // Create a GrammarBuilder object and append the Choices object.
             GrammarBuilder gb = new GrammarBuilder();
@@ -67,6 +67,7 @@ namespace Personal_Voice_Assistant
                 case "What is the time":
                 case "What time is it":
                 case "Tell me the time":
+                case "Time":
                     currentTime = DateTime.Now; //Get current time
 
                     /*Convert time to a string, and format to only display hours and minutes*/
