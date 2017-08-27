@@ -8,3 +8,13 @@ D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant
 D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\Personal_Voice_Assistant.pdb
 D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\obj\Debug\Personal_Voice_Assistant.exe
 D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\obj\Debug\Personal_Voice_Assistant.pdb
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\IronPython.dll
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\IronPython.Modules.dll
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\Microsoft.Dynamic.dll
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\Microsoft.Scripting.dll
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\Microsoft.Scripting.Metadata.dll
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\IronPython.xml
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\IronPython.Modules.xml
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\Microsoft.Dynamic.xml
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\Microsoft.Scripting.xml
+D:\Users\Kristian\source\repos\Personal_Voice_Assistant\Personal_Voice_Assistant\bin\Debug\Microsoft.Scripting.Metadata.xml

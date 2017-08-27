@@ -8,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Recognition;
+using System.Speech.Synthesis;
 
 namespace Personal_Voice_Assistant
 {
     public partial class Form1 : Form
     {
+        //Create new synthesizer for speach
+        SpeechSynthesizer synth;
+
         public Form1()
         {
             InitializeComponent();
@@ -23,19 +27,28 @@ namespace Personal_Voice_Assistant
 
             // Create a new SpeechRecognitionEngine instance.
             SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
-
+            synth = new SpeechSynthesizer();
+            
             // Create a simple grammar that recognizes "red", "green", or "blue".
-            Choices colors = new Choices();
-            colors.Add(new string[] { "red", "green", "blue", "What is the time", "Tell me the time", "What time is it", "Time" });
+            Choices commands = new Choices();
+            commands.Add(new string[] {
+                "red", "green", "blue", //Colors
+                "What is the time", "Tell me the time", "What time is it", "Time", //Time
+                "What day is it", "What day is it today", "Which day is it today", "Can you tell me what day it is" //Day
+
+            });
  
             // Create a GrammarBuilder object and append the Choices object.
             GrammarBuilder gb = new GrammarBuilder();
-            gb.Append(colors);
+            gb.Append(commands);
 
             // Create the Grammar instance and load it into the speech recognition engine.
             Grammar g = new Grammar(gb);
             recognizer.LoadGrammar(g);
             recognizer.SetInputToDefaultAudioDevice();
+
+            //Speak through default audio device
+            synth.SetOutputToDefaultAudioDevice(); 
 
             recognizer.RecognizeAsync(RecognizeMode.Multiple);
 
@@ -48,7 +61,6 @@ namespace Personal_Voice_Assistant
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             DateTime currentTime; //Var to hold time
-
 
             switch (e.Result.Text)
             {
@@ -64,6 +76,19 @@ namespace Personal_Voice_Assistant
                     richTextBox1.Text += "\nblue was recognized";
                     break;
 
+                case "What day is it":
+                case "What day is it today":
+                case "Which day is it today":
+                case "Can you tell me what day it is":
+                    currentTime = DateTime.Now;
+                    string dayString = currentTime.ToString("dddd");
+
+                    richTextBox1.Text += "\nCurrent day: ";
+                    richTextBox1.Text += dayString;
+
+                    synth.Speak("Current day is" + dayString);
+                    break;
+
                 case "What is the time":
                 case "What time is it":
                 case "Tell me the time":
@@ -74,8 +99,11 @@ namespace Personal_Voice_Assistant
                     string timeString = currentTime.ToString("HH:mm");
 
                     /*Display current time*/
-                    richTextBox1.Text += "\nDisplaying time: ";
+                    richTextBox1.Text += "\nCurrent time: ";
                     richTextBox1.Text += timeString;
+
+                    synth.Speak("Current time is" + timeString);
+                    
                     break;
             }
         }
