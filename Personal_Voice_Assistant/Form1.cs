@@ -29,10 +29,9 @@ namespace Personal_Voice_Assistant
             SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
             synth = new SpeechSynthesizer();
             
-            // Create a simple grammar that recognizes "red", "green", or "blue".
+            //Array of commands
             Choices commands = new Choices();
             commands.Add(new string[] {
-                "red", "green", "blue", //Colors
                 "What is the time", "Tell me the time", "What time is it", "Time", //Time
                 "What day is it", "What day is it today", "Which day is it today", "Can you tell me what day it is", "day", //Day
                 "play glitter"
@@ -65,14 +64,6 @@ namespace Personal_Voice_Assistant
 
             switch (e.Result.Text)
             {
-                case "red":
-                    richTextBox1.Text += "\nred was recognized";
-                    break;
-                    
-                case "blue":
-                    richTextBox1.Text += "\nblue was recognized";
-                    break;
-
                 case "what day is it":
                 case "what day is it today":
                 case "which day is it today":
