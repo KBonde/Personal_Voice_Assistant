@@ -16,6 +16,8 @@ namespace Personal_Voice_Assistant
     {
         //Create new synthesizer for speach
         SpeechSynthesizer synth;
+        // Create a new SpeechRecognitionEngine instance.
+        SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
 
         public Form1()
         {
@@ -24,9 +26,6 @@ namespace Personal_Voice_Assistant
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            // Create a new SpeechRecognitionEngine instance.
-            SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
             synth = new SpeechSynthesizer();
             
             //Array of commands
@@ -34,7 +33,8 @@ namespace Personal_Voice_Assistant
             commands.Add(new string[] {
                 "What is the time", "Tell me the time", "What time is it", "Time", //Time
                 "What day is it", "What day is it today", "Which day is it today", "Can you tell me what day it is", "day", //Day
-                "play glitter"
+                "play", "stop playing", "poop", //Music commands
+                "glitter" //Songs
 
             });
  
@@ -61,6 +61,7 @@ namespace Personal_Voice_Assistant
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             DateTime currentTime; //Var to hold time
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
 
             switch (e.Result.Text)
             {
@@ -95,12 +96,34 @@ namespace Personal_Voice_Assistant
                     
                     break;
 
-                case "play glitter":
-                    System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-
-                    player.SoundLocation = "glitter.wav";
-                    player.Play();
+                case "play":
+                    //Use the recognizer to determine what song they want to be played
+                    recognizer.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(songHandler);
+                    
                     break;
+
+                //Stop playing anything
+                case "stop playing":
+                    player.Stop();
+                    break;
+            }
+
+            void songHandler(object poop, SpeechRecognizedEventArgs ePoop)
+            {
+                switch (ePoop.Result.Text)
+                {
+                    case "glitter":
+                        playSong("glitter");
+                        break;
+                }
+            }
+
+            void playSong(string name)
+            {
+                richTextBox1.Text += "\nPlaying: " + name;
+
+                player.SoundLocation = "../../../music/" + name + ".wav";
+                player.Play();
             }
         }
     }
