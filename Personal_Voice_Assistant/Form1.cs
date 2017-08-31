@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Recognition;
 using System.Speech.Synthesis;
+using System.Xml;
 
 namespace Personal_Voice_Assistant
 {
@@ -34,8 +35,8 @@ namespace Personal_Voice_Assistant
                 "What is the time", "Tell me the time", "What time is it", "Time", //Time
                 "What day is it", "What day is it today", "Which day is it today", "Can you tell me what day it is", "day", //Day
                 "play", "stop playing", "poop", //Music commands
-                "glitter" //Songs
-
+                "glitter", //Songs
+                "weather" //Weather
             });
  
             // Create a GrammarBuilder object and append the Choices object.
@@ -48,7 +49,7 @@ namespace Personal_Voice_Assistant
             recognizer.SetInputToDefaultAudioDevice();
 
             //Speak through default audio device
-            synth.SetOutputToDefaultAudioDevice(); 
+            synth.SetOutputToDefaultAudioDevice();
 
             recognizer.RecognizeAsync(RecognizeMode.Multiple);
 
@@ -106,6 +107,10 @@ namespace Personal_Voice_Assistant
                 case "stop playing":
                     player.Stop();
                     break;
+
+                case "weather":
+                    synth.Speak("The sky is " + GetWeather("cond") + " today.");
+                    break;
             }
 
             void songHandler(object poop, SpeechRecognizedEventArgs ePoop)
@@ -124,6 +129,43 @@ namespace Personal_Voice_Assistant
 
                 player.SoundLocation = "../../../music/" + name + ".wav";
                 player.Play();
+            }
+
+            String GetWeather(String input)
+            {
+                string temp;
+                string condition;
+
+                String query = String.Format("https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='denmar, aarhus')&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys");
+                                              
+
+                XmlDocument wData = new XmlDocument();
+                wData.Load(query);
+
+                XmlNamespaceManager manager = new XmlNamespaceManager(wData.NameTable);
+                manager.AddNamespace("yweather", "http://xml.weather.yahoo.com/ns/rss/1.0");
+
+                XmlNode channel = wData.SelectSingleNode("query").SelectSingleNode("results").SelectSingleNode("channel");
+                XmlNodeList nodes = wData.SelectNodes("query/results/channel");
+                try
+                {
+                    temp = channel.SelectSingleNode("item").SelectSingleNode("yweather:condition", manager).Attributes["temp"].Value;
+                    condition = channel.SelectSingleNode("item").SelectSingleNode("yweather:condition", manager).Attributes["text"].Value;
+                    if (input == "temp")
+                    {
+                        return temp;
+                    }
+
+                    if (input == "cond")
+                    {
+                        return condition;
+                    }
+                }
+                catch
+                {
+                    return "Error Reciving data";
+                }
+                return "error";
             }
         }
     }
