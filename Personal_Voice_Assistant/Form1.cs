@@ -86,14 +86,16 @@ namespace Personal_Voice_Assistant
                 case "Time":
                     currentTime = DateTime.Now; //Get current time
 
-                    /*Convert time to a string, and format to only display hours and minutes*/
-                    string timeString = currentTime.ToString("HH:mm");
+                    /*Convert time to a string*/
+                    string timeString = currentTime.ToString("HH:mm:ss");
 
                     /*Display current time*/
                     richTextBox1.Text += "\nCurrent time: ";
                     richTextBox1.Text += timeString;
 
-                    synth.Speak("Current time is" + timeString);
+                    /*Tell user time in 'spoken' format*/
+                    timeString = currentTime.ToString("HHmm");
+                    synth.Speak("Current time is " + timeString);
                     
                     break;
 
@@ -109,7 +111,11 @@ namespace Personal_Voice_Assistant
                     break;
 
                 case "weather":
-                    synth.Speak("The sky is " + GetWeather("cond") + " today, and the temperature outside is " + GetWeather("temp") + " degrees celcius.");
+                    richTextBox1.Text += "\nCurrent conditions: ";
+                    richTextBox1.Text += GetWeather("cond");
+                    richTextBox1.Text += "\nCurrent temperature: ";
+                    richTextBox1.Text += GetWeather("temp");
+                    synth.Speak("The sky is " + GetWeather("cond") + " today, and the temperature outside is " + GetWeather("temp") + " degrees celcius.");            
                     break;
             }
 
