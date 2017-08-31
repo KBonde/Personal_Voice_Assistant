@@ -109,7 +109,7 @@ namespace Personal_Voice_Assistant
                     break;
 
                 case "weather":
-                    synth.Speak("The sky is " + GetWeather("cond") + " today.");
+                    synth.Speak("The sky is " + GetWeather("cond") + " today, and the temperature outside is " + GetWeather("temp") + " degrees celcius.");
                     break;
             }
 
@@ -136,7 +136,9 @@ namespace Personal_Voice_Assistant
                 string temp;
                 string condition;
 
-                String query = String.Format("https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='denmar, aarhus')&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys");
+                double tempToCelcius = 0;
+
+                String query = String.Format("https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='denmark, aarhus')&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys");
                                               
 
                 XmlDocument wData = new XmlDocument();
@@ -151,6 +153,14 @@ namespace Personal_Voice_Assistant
                 {
                     temp = channel.SelectSingleNode("item").SelectSingleNode("yweather:condition", manager).Attributes["temp"].Value;
                     condition = channel.SelectSingleNode("item").SelectSingleNode("yweather:condition", manager).Attributes["text"].Value;
+
+                    //Convert from F to C
+                    Double.TryParse(temp, out tempToCelcius); //Convert to double
+
+                    tempToCelcius = Math.Round((tempToCelcius - 32) * 0.5556); //Calculate in C
+
+                    temp = Convert.ToString(tempToCelcius); //Convert back to string
+
                     if (input == "temp")
                     {
                         return temp;
