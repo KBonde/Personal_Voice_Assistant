@@ -33,7 +33,7 @@ namespace Personal_Voice_Assistant
             Choices commands = new Choices();
             commands.Add(new string[] {
                 "What is the time", "Tell me the time", "What time is it", "Time", //Time
-                "What day is it", "What day is it today", "Which day is it today", "Can you tell me what day it is", "day", //Day
+                "What day is it", "What day is it today", "Which day is it today", "Can you tell me what day it is", "day", "is it friday", //Day
                 "play", "stop playing", "poop", //Music commands
                 "glitter", //Songs
                 "weather" //Weather
@@ -64,6 +64,9 @@ namespace Personal_Voice_Assistant
             DateTime currentTime; //Var to hold time
             System.Media.SoundPlayer player = new System.Media.SoundPlayer();
 
+            string[] daysInDanish = {"mandag", "tirsdag", "onsdag", "torsdag", "fredag", "lørdag", "søndag"};
+            string[] daysInEnglish = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+
             switch (e.Result.Text)
             {
                 case "what day is it":
@@ -74,10 +77,29 @@ namespace Personal_Voice_Assistant
                     currentTime = DateTime.Now;
                     string dayString = currentTime.ToString("dddd");
 
+                    for(int i = 0; i < 7; i++)
+                    {
+                        if (dayString == daysInDanish[i]) dayString = daysInEnglish[i];
+                    }
+
                     richTextBox1.Text += "\nCurrent day: ";
                     richTextBox1.Text += dayString;
 
                     synth.Speak("Current day is" + dayString);
+                    break;
+
+                case "is it friday":
+                    if(DateTime.Now.ToString("dddd") == "fredag")
+                    {
+                        synth.Speak("It is! Go drink you idiot!");
+                    } else if (DateTime.Now.ToString("dddd") == "lørdag")
+                    {
+                        synth.Speak("It is not. But you can still party, because it is saturday! Yay, I love to party so o o o o very much.");
+                    } else
+                    {
+                        synth.Speak("No, get back to work.");
+                    }
+
                     break;
 
                 case "What is the time":
@@ -144,9 +166,8 @@ namespace Personal_Voice_Assistant
 
                 double tempToCelcius = 0;
 
-                String query = String.Format("https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='denmark, aarhus')&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys");
-                                              
-
+                String query = String.Format("https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='denmark, hinnerup')&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys");
+                                             
                 XmlDocument wData = new XmlDocument();
                 wData.Load(query);
 
@@ -186,4 +207,3 @@ namespace Personal_Voice_Assistant
         }
     }
 }
-
