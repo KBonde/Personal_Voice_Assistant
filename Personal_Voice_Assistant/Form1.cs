@@ -94,7 +94,7 @@ namespace Personal_Voice_Assistant
                         synth.Speak("It is! Go drink you idiot!");
                     } else if (DateTime.Now.ToString("dddd") == "lørdag")
                     {
-                        synth.Speak("It is not. But you can still party, because it is saturday! Yay, I love to party so o o o o very much.");
+                        synth.Speak("It is not. But you can still party, because it is saturday!");
                     } else
                     {
                         synth.Speak("No, get back to work.");
