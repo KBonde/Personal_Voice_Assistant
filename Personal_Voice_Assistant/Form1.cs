@@ -34,7 +34,7 @@ namespace Personal_Voice_Assistant
             commands.Add(new string[] {
                 "What is the time", "Tell me the time", "What time is it", "Time", //Time
                 "What day is it", "What day is it today", "Which day is it today", "Can you tell me what day it is", "day", "is it friday", //Day
-                "play", "stop playing", "poop", //Music commands
+                "play", "stop playing", //Music commands
                 "glitter", //Songs
                 "weather" //Weather
             });
